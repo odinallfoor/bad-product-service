@@ -1,0 +1,21 @@
+### Maven / Java ###
+target/
+*.log
+*.iml
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.ipr
+
+### OS ###
+.DS_Store
+Thumbs.db
+
+### Docker ###
+*.pid
+
+### Otros ###
+# Si más adelante generas código (por ejemplo stubs),
+# puedes ignorar esa carpeta aquí:
+# generated/
