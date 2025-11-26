@@ -10,31 +10,33 @@ import java.util.List;
 @Service
 public class ProductService {
 
-    // mala práctica: inyección por campo en vez de constructor
+    // inyeccion de dependencia no recomendada, se debe cambiar por inyteccion por contructor
     @Autowired
     private ProductRepository productRepository;
 
-    // método dios que hace de todo
+    // recibe directamente un jpa, cuando deberia ser un DTO
     public Product createProduct(Product p) {
-        // validación pobre y duplicada (también se valida en controller)
         if (p.getName() == null || p.getName().isBlank()) {
             throw new RuntimeException("Nombre requerido");
         }
+        // validacion repetida en el controller, deberia quedar solo aca esta validacion
         if (p.getPrice() < 0) {
             throw new RuntimeException("Precio no puede ser negativo");
         }
-
-        // no seteamos nada más (ni timestamps, ni auditorías)
+        // no estoy del to do seguro, pero creo que esto deberia estar en la capa 3 y esta es la 2 no?
+        // otra cosa, esta devolviendo un jpa, deberia cambiarse por un DTO
         return productRepository.save(p);
     }
 
+    // devuelve una lista de JPA, deberia devolver una lista de DTO
     public List<Product> getAllProducts() {
-        // sin paginación => potencial DoS si hay miles
+
         return productRepository.findAll();
     }
 
+    // como entrada solicita un JPA, deberia cambiarse por un DTO
     public Product getProductById(Long id) {
-        // get() directo sobre Optional => puede lanzar NoSuchElementException rara
+
         return productRepository.findById(id).get();
     }
 
@@ -42,12 +44,13 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    // como entrada solicita un JPA, deberia cambiarse a un DTO
     public Product updateProduct(Long id, Product incoming) {
         Product existing = productRepository.findById(id).orElseThrow(
                 () -> new RuntimeException("No existe producto id=" + id)
         );
 
-        // update irresponsable: pisamos todo sin reglas de negocio claras
+
         existing.setName(incoming.getName());
         existing.setDescription(incoming.getDescription());
         existing.setPrice(incoming.getPrice());
@@ -56,6 +59,7 @@ public class ProductService {
         return productRepository.save(existing);
     }
 
+    // devuelve una lista de JPA, deberia ser un DTO
     public List<Product> search(String q) {
         return productRepository.findByNameContainingIgnoreCase(q);
     }

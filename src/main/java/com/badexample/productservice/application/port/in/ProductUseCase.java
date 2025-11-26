@@ -1,6 +1,6 @@
 package com.badexample.productservice.application.port.in;
 
-import com.badexample.productservice.model.Product;
+import com.badexample.productservice.domain.model.Product;
 
 import java.util.List;
 import java.util.Optional;
