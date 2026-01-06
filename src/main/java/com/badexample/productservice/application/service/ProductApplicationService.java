@@ -4,10 +4,12 @@ import com.badexample.productservice.application.exception.ProductNotFoundExcept
 import com.badexample.productservice.application.port.in.ProductUseCase;
 import com.badexample.productservice.application.port.out.ProductPersistencePort;
 import com.badexample.productservice.domain.model.Product;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ProductApplicationService implements ProductUseCase {
 
     private final ProductPersistencePort persistencePort;
@@ -62,6 +64,7 @@ public class ProductApplicationService implements ProductUseCase {
 
     @Override
     public List<Product> searchByName(String name) {
+
         return persistencePort.findByName(name);
     }
 }

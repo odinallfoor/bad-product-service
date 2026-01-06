@@ -19,7 +19,12 @@ public final class Product {
         this.stock = requiredNonNegative(stock,"La cantidad no puede ser negativa.");
     }
 
-    public static Product of(Long id, String name, String description, BigDecimal price, int stock){
+    public static Product of(String name, String description, BigDecimal price, int stock){
+        return new Product(null,name,description,price,stock);
+    }
+
+    public static Product rehydrate(Long id, String name, String description, BigDecimal price, int stock){
+        Objects.requireNonNull(id, "El id es obligatorio para crear.");
         return new Product(id,name,description,price,stock);
     }
 

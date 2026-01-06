@@ -21,7 +21,7 @@ public final class ProductJpaMapper {
 
     public static Product toDomain(ProductJpaEntity productJpaEntity){
 
-        return Product.of(
+        return Product.rehydrate(
                 productJpaEntity.getId(),
                 productJpaEntity.getName(),
                 productJpaEntity.getDescription(),
