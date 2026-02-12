@@ -7,7 +7,6 @@ import com.badexample.productservice.infrastructure.web.dto.ProductResponse;
 import com.badexample.productservice.infrastructure.web.dto.UpdateProductRequest;
 import com.badexample.productservice.infrastructure.web.mapper.ProductWebMapper;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
