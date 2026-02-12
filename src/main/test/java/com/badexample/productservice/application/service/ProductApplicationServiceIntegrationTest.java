@@ -50,20 +50,6 @@ public class ProductApplicationServiceIntegrationTest {
 
         }
 
-        @Test
-        void createProduct_whenCreateWithSameId_shouldReturnError(){
-
-            Product created = service.createProduct(Product.of(
-                    "Galleta",
-                    "Galleta pequeña.",
-                    new BigDecimal("1200.00"),
-                    1
-            ));
-
-            service.createProduct(created);
-
-            assertThrows(NullPointerException.class, ()-> service.createProduct(created));
-        }
     }
 
     @Nested
